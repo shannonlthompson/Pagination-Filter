@@ -1,35 +1,43 @@
-let student_list = document.querySelector('.student-list');
+let list = document.querySelectorAll('.student-list li');
 
-//does this need to be a global var?
-const total_page_num = Math.ceil(student_list.childElementCount / 10); 
-
-const container = document.querySelector('.page');
-
+//print page numbers
 const printPageNums = () => {
+    const total_page_num = Math.ceil(list.length / 10);
+    console.log("total pages" + total_page_num);
+    const container = document.querySelector('.page');
     let newDiv = document.createElement('div');
-    newDiv.innerHTML = `<div class="pagination">
-                            <ul>
-                              <li>
-                                <a class="active" href="#">1</a>
-                              </li>
-                               <li>
-                                <a href="#">2</a>
-                              </li>
-                               <li>
-                                <a href="#">3</a>
-                              </li>
-                               <li>
-                                <a href="#">4</a>
-                              </li>
-                               <li>
-                                <a href="#">5</a>
-                              </li>
-                            </ul>
-                        </div>`;
+    let pages = '<div class="pagination"><ul>';
+    for(let i = 1; i<=total_page_num; i++) {
+        pages += `<li><a class="active" href="#"> ${i} </li>`;
+    }
+    pages += '</ul></div>';
+    newDiv.innerHTML = pages;
     container.appendChild(newDiv);
 };
 printPageNums();
-const pageContainer = document.querySelector(.pagination);
-//pageContainer.addEventListener('click', )
+const pageContainer = document.querySelector('.pagination');
+
+pageContainer.addEventListener('click', (event) => {
+    const page = event.target.innerHTML;
+    console.log("page #: " + page);
+
+    const rangeStart = (page - 1) * 10;
+    const rangeEnd = (page - 1) * 10 + 9;
+    for(let i=0; i < list.length; i++) {
+        if (rangeStart === 0 && i === 0) {
+            console.log("showing: " + i);
+            list[i].className = "student-item cf show";
+        }
+        else if(i >= rangeStart &&  i <= rangeEnd){
+            console.log("showing: " + i);
+            list[i].className += "student-item cf show";
+        }
+        else {
+            console.log("hiding: " + i);
+            list[i].className += "student-item cf hide";
+        }
+    }
+});
+
 
 
