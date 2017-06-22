@@ -49,8 +49,6 @@ const showOrHide = (page) => {
 
 const makeLinkActive = (page) => {
     const pagination = document.querySelectorAll('.pagination ul li');
-    console.log(pagination);
-    console.log("Page "+page);
     for(let i=0; i < pagination.length; i++) {
         if ((i+1) === page){
             pagination[i].innerHTML = `<a class="active" href="#"> ${pagination[i].innerText} </a>`;
@@ -66,9 +64,9 @@ showFirst10();
 const pageContainer = document.querySelector('.pagination');
 
 pageContainer.addEventListener('click', (event) => {
-    //If event is a number, show the students for that page
-    const page = parseInt(event.target.innerHTML, 10);
-    if(!isNaN(page)){
+    //If event is an anchor tag, show the students for that page
+    if(event.target.tagName === 'A'){
+        const page = parseInt(event.target.innerHTML, 10);
         showOrHide(page);
         makeLinkActive(page);
     }
