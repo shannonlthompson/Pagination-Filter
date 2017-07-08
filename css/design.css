@@ -4,6 +4,10 @@ body{
   color: #222;
 }
 
+.error {
+    display: block;
+}
+
 .page{
   margin: 50px auto;
   width: 70%;
@@ -15,7 +19,7 @@ body{
 .page-header{
   margin-bottom: 20px;
 }
-  .page-header h2{
+  .page-header h2 {
     float: left;
     font-size: 22px;
     text-transform: uppercase;
